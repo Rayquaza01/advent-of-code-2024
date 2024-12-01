@@ -63,3 +63,9 @@ function _draw()
 
 	print(string.format("Similarity: \f9%d\f7", similarity), 64, 0)
 end
+
+return {
+	_init   = _init,
+	_update = _update,
+	_draw   = _draw
+}

@@ -70,3 +70,9 @@ function _draw()
 
 	print(string.format("\f7Sum: \f9%d\f7", sum), 96, 0)
 end
+
+return {
+	_init   = _init,
+	_update = _update,
+	_draw   = _draw,
+}
