@@ -2,13 +2,7 @@
 -- Advent of Code 2024
 -- by Arnaught
 
-function _init()
-end
+-- uncomment the code you want to run
 
-function _update()
-end
-
-function _draw()
-	cls()
-	print("Hello, world!")
-end
+-- include("day01/main.lua")
+include("day01/main2.lua")
