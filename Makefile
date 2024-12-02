@@ -4,8 +4,7 @@ SOURCES   := $(shell find $(SOURCEDIR) -name '*.lua' -or -name '.info.pod' -or -
 build: aoc2024.p64
 
 start:
-	prt load /projects/advent-of-code-2024/src
-	prt run
+	prt < scripts/start.lua
 
 extract:
 	prt cp -f /projects/advent-of-code-2024/aoc2024.p64 /projects/advent-of-code-2024/src
