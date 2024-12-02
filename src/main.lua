@@ -4,6 +4,12 @@
 
 include("require.lua")
 
+local SNOWFLAKES
+local SNOWFLAKE_SPAWN_RATE
+local AOC_DAYS_CODE
+local LOADED
+local SELECTION_TEXT
+
 function _init()
 	--- @type userdata[]
 	SNOWFLAKES = {}
@@ -134,7 +140,7 @@ function _draw()
 		end
 	end
 
-	print("Type a \feday\f7\nand \fepart\f7 to\nstart.\n(e.g. \feA1\f7)\n")
+	print("Type a \feday\f7\nand \fepart\f7 to\nstart.\n(e.g. \feA1\f7)")
 end
 
 function load_day(d, p)
@@ -145,8 +151,3 @@ function load_day(d, p)
 		notify(string.format("Script for day %s part %d not found!", d, p))
 	end
 end
-
--- uncomment the code you want to run
-
--- include("day01/main.lua")
--- include("day01/main2.lua")
