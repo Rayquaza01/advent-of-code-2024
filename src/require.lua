@@ -9,7 +9,7 @@ function require(name)
 		return already_imported
 	end
 
-	local filename = fullpath(name..'.lua')
+	local filename = fullpath(name:gsub("%.", "/") .. ".lua")
 	local src = fetch(filename)
 
 	if (type(src) ~= "string") then
