@@ -22,7 +22,7 @@ function _init()
 
 	AOC_DAYS_CODE = {
 		{ "day01/main1", "day01/main2" },
-		-- { "day02/main1", "day02/main2" },
+		{ "day02/main1", "day02/main2" },
 		-- { "day03/main1", "day03/main2" },
 		-- { "day04/main1", "day04/main2" },
 		-- { "day05/main1", "day05/main2" },
