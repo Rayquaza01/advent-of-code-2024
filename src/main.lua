@@ -1,10 +1,14 @@
---[[pod_format="raw",created="2024-03-15 13:58:36",modified="2024-12-01 04:19:09",revision=30]]
+--[[pod_format="raw",created="2024-03-15 13:58:36",modified="2024-12-02 00:06:56",revision=39]]
 -- Advent of Code 2024
 -- by Arnaught
 
 include("require.lua")
 
 function _init()
+	--- @type userdata[]
+	SNOWFLAKES = {}
+	SNOWFLAKE_SPAWN_RATE = 0.25
+
 	window({
 		width = 256, height = 128,
 		title = "AoC 2024"
@@ -50,6 +54,28 @@ function _update()
 		return LOADED._update()
 	end
 
+	if rnd() <= SNOWFLAKE_SPAWN_RATE then
+		-- x, y, speed, sway speed
+		add(SNOWFLAKES, vec(
+			flr(rnd(288) - 32), -- x
+			0,             -- y
+			rnd(1.5) + .5, -- speed
+			rnd(.5) + 1    -- sway speed
+		))
+	end
+
+	for s in all(SNOWFLAKES) do
+		local x, y, speed, sway = s:get(0, 4)
+
+		--- @cast s userdata
+		s:set(0, x + math.cos(t() * sway / 5) / 2, y + speed)
+
+		-- delete snowflakes that fall offscreen
+		if y + speed > 128 then
+			del(SNOWFLAKES, s)
+		end
+	end
+
 	if peektext() then
 		local t = readtext()
 
@@ -76,21 +102,48 @@ function _draw()
 	end
 
 	cls()
-	for i = 1, min(#AOC_DAYS_CODE, 25), 1 do
-		print(
-			string.format(
-				"Day \f8%02d\f7 (%s%s\f7)",
-				i, "\fr", chr(i + 64)
-			),
-			((i > 16) and 64 or 0),
-			(i - 1 - (i > 16 and 16 or 0)) * 8
-		)
+	spr(1, 128, 0)
+	print("Advent of Code 2024", 145, 4, 14)
+
+	for s in all(SNOWFLAKES) do
+		--- @cast s userdata
+		local x, y = s:get(0, 2)
+
+		pset(x, y, 7)
 	end
+
+	for i = 1, 25, 1 do
+		if AOC_DAYS_CODE[i] ~= nil then
+			print(
+				string.format(
+					"Day \fa%02d\f7 (\fr%s\f7)",
+					i, chr(i + 64)
+				),
+				((i > 16) and 64 or 0),
+				(i - 1 - (i > 16 and 16 or 0)) * 8
+			)
+		else
+			print(
+				string.format(
+					"\f6Day \f8%02d\f7 (\f8!\f7)",
+					i, chr(i + 64)
+				),
+				((i > 16) and 64 or 0),
+				(i - 1 - (i > 16 and 16 or 0)) * 8
+			)
+		end
+	end
+
+	print("Type a \feday\f7\nand \fepart\f7 to\nstart.\n(e.g. \feA1\f7)\n")
 end
 
 function load_day(d, p)
-	LOADED = require(AOC_DAYS_CODE[d][p])
-	LOADED._init()
+	if AOC_DAYS_CODE[d] ~= nil and AOC_DAYS_CODE[d][p] ~= nil then
+		LOADED = require(AOC_DAYS_CODE[d][p])
+		LOADED._init()
+	else
+		notify(string.format("Script for day %s part %d not found!", d, p))
+	end
 end
 
 -- uncomment the code you want to run
