@@ -131,7 +131,7 @@ function _draw()
 		else
 			print(
 				string.format(
-					"\f6Day \f8%02d\f7 (\f8!\f7)",
+					"\f6Day \f8%02d\f6 (\f8!\f6)\f7",
 					i, chr(i + 64)
 				),
 				((i > 16) and 64 or 0),
