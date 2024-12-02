@@ -43,6 +43,8 @@ local function _init()
 	safes = {}
 
 	safe = 0
+
+	autoscroll = true
 end
 
 local function _update()
