@@ -3,7 +3,9 @@
 --- @param cb function
 local function map(arr, cb)
 	local res = {}
-	for k, v in ipairs(arr) do
+	for k = 1, #arr, 1 do
+		local v = arr[k]
+
 		add(res, cb(v, k, arr))
 	end
 
