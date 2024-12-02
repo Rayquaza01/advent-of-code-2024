@@ -11,6 +11,8 @@ local safe
 local safes
 local diffs
 
+local autoscroll
+
 local function less_than_four(n)
 	return math.abs(n) < 4
 end
@@ -38,6 +40,8 @@ local function _init()
 	safes = {}
 
 	safe = 0
+
+	autoscroll = true
 end
 
 local function _update()
@@ -62,8 +66,29 @@ local function _update()
 		recordidx += 1
 	end
 
-	offset = mid(recordidx - 16, #records - 16, 0)
-	if offset < 0 then offset = 0 end
+	if autoscroll then
+		offset = mid(recordidx - 16, #records - 16, 0)
+	end
+
+	if btn(0) then
+		offset = mid(offset - 1, #records - 16, 0)
+		autoscroll = false
+	elseif btn(1) then
+		offset = mid(offset + 1, #records - 16, 0)
+		autoscroll = false
+	elseif btn(2) then
+		offset = 0
+		autoscroll = false
+	elseif btn(3) then
+		offset = #records - 16
+		autoscroll = false
+	end
+
+	if btn(4) then
+		autoscroll = true
+	end
+
+	offset = mid(offset, 0, #records - 1)
 end
 
 local function _draw()
