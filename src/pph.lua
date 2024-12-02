@@ -1,4 +1,4 @@
-function pretty_printh(s)
+local function pretty_printh(s)
 	s = s
 		:gsub("%[fg=(#?%w+)]", function (c)
 			if c:find("^%d+$") then
@@ -40,14 +40,21 @@ function pretty_printh(s)
 	printh(s .. "\27[0m")
 end
 
-function error(msg)
+local function error(msg)
 	pretty_printh("[fg=1][b][ERROR][/b][/fg]: " .. msg)
 end
 
-function warn(msg)
+local function warn(msg)
 	pretty_printh("[fg=3][b][WARNING][/b][/fg]: " .. msg)
 end
 
-function info(msg)
+local function info(msg)
 	pretty_printh("[fg=4][b][INFO][/b][/fg]: " .. msg)
 end
+
+return {
+	pretty_printh = pretty_printh,
+	error = error,
+	warn = warn,
+	info = info
+}

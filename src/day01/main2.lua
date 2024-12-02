@@ -1,9 +1,12 @@
-include("pph.lua")
+local pph = require("pph")
+
+local list1
+local list2
+local freq
+local similarity
 
 function _init()
-    info("Day 1 Part 2 Start")
-
-	offset = 0
+    pph.info("Day 1 Part 2 Start")
 
     window({
         width = 256, height = 128,
@@ -15,7 +18,7 @@ function _init()
 
     -- local input = fetch("day01/p1test.txt")
     local input = fetch("day01/p1data.txt")
-    info("Loaded input")
+    pph.info("Loaded input")
     if type(input) ~= "string" then
         error("Invalid input")
     end

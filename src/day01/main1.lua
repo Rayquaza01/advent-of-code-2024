@@ -1,12 +1,18 @@
-include("pph.lua")
-include("mergesort.lua")
+local pph = require("pph")
+local sort = require("mergesort")
 
-function lt(a, b)
+local offset
+local list1
+local list2
+local diffs
+local sum
+
+local function lt(a, b)
     return a < b
 end
 
-function _init()
-    info("Day 1 Part 1 Start ")
+local function _init()
+    pph.info("Day 1 Part 1 Start ")
 
 	offset = 0
 
@@ -20,7 +26,7 @@ function _init()
 
     -- local input = fetch("day01/p1test.txt")
     local input = fetch("day01/p1data.txt")
-    info("Loaded input")
+    pph.info("Loaded input")
     if type(input) ~= "string" then
         error("Invalid input")
     end
