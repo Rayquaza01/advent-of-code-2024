@@ -1,6 +1,8 @@
 local pph = require("pph")
 local sum = require("array.sum")
 
+local scroller = require("scroller")
+
 local input
 local matches
 
@@ -35,23 +37,7 @@ local function _update()
 		offset = mid(offset + 1, #matches - 16, 0)
 	end
 
-	if btn(0) then
-		offset = mid(offset - 1, #matches - 16, 0)
-		autoscroll = false
-	elseif btn(1) then
-		offset = mid(offset + 1, #matches - 16, 0)
-		autoscroll = false
-	elseif btn(2) then
-		offset = 0
-		autoscroll = false
-	elseif btn(3) then
-		offset = #matches - 16
-		autoscroll = false
-	end
-
-	if btn(4) then
-		autoscroll = true
-	end
+	offset, autoscroll = scroller(offset, #matches - 16, 1, autoscroll)
 
 	offset = mid(offset, 0, #matches - 1)
 end

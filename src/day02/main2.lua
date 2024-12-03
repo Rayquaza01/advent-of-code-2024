@@ -1,6 +1,8 @@
 local pph = require("pph")
 local get_input = require("day02.input")
 
+local scroller = require("scroller")
+
 local amap = require("array.map")
 local every = require("array.every")
 local copy = require("array.copy")
@@ -118,23 +120,7 @@ local function _update()
 		offset = mid(recordidx - 16, #records - 16, 0)
 	end
 
-	if btn(0) then
-		offset = mid(offset - 1, #records - 16, 0)
-		autoscroll = false
-	elseif btn(1) then
-		offset = mid(offset + 1, #records - 16, 0)
-		autoscroll = false
-	elseif btn(2) then
-		offset = 0
-		autoscroll = false
-	elseif btn(3) then
-		offset = #records - 16
-		autoscroll = false
-	end
-
-	if btn(4) then
-		autoscroll = true
-	end
+	offset, autoscroll = scroller(offset, #records - 16, 1, autoscroll)
 
 	offset = mid(offset, 0, #records - 1)
 end
