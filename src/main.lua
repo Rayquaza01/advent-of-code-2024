@@ -23,7 +23,7 @@ function _init()
 	AOC_DAYS_CODE = {
 		{ "day01/main1", "day01/main2" },
 		{ "day02/main1", "day02/main2" },
-		-- { "day03/main1", "day03/main2" },
+		{ "day03/main1", "day03/main2" },
 		-- { "day04/main1", "day04/main2" },
 		-- { "day05/main1", "day05/main2" },
 		-- { "day06/main1", "day06/main2" },
@@ -122,7 +122,8 @@ function _draw()
 		if AOC_DAYS_CODE[i] ~= nil then
 			print(
 				string.format(
-					"Day \fa%02d\f7 (\fr%s\f7)",
+					"Day %s%02d\f7 (\fr%s\f7)",
+					#AOC_DAYS_CODE[i] == 2 and "\fa" or "\f9",
 					i, chr(i + 64)
 				),
 				((i > 16) and 64 or 0),
