@@ -2,6 +2,8 @@
 -- Advent of Code 2024
 -- by Arnaught
 
+argv = env().argv
+
 include("require.lua")
 
 local SNOWFLAKES
@@ -24,7 +26,7 @@ function _init()
 		{ "day01/main1", "day01/main2" },
 		{ "day02/main1", "day02/main2" },
 		{ "day03/main1", "day03/main2" },
-		-- { "day04/main1", "day04/main2" },
+		{ "day04/main1", "day04/main2" },
 		-- { "day05/main1", "day05/main2" },
 		-- { "day06/main1", "day06/main2" },
 		-- { "day07/main1", "day07/main2" },
@@ -147,7 +149,7 @@ end
 function load_day(d, p)
 	if AOC_DAYS_CODE[d] ~= nil and AOC_DAYS_CODE[d][p] ~= nil then
 		LOADED = require(AOC_DAYS_CODE[d][p])
-		LOADED._init()
+		LOADED._init(argv)
 	else
 		notify(string.format("Script for day %s part %d not found!", d, p))
 	end
