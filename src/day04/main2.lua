@@ -10,7 +10,6 @@ local grid
 local position
 
 local total
-local matches
 
 local width
 local height
@@ -82,6 +81,8 @@ local function _init()
 	-- grid, width, height = load_input("day04/p1test.txt")
 	grid, width, height = load_input("day04/p1data.txt")
 
+	pph.info(string.format("Width: %d, Height: %d", width, height))
+
 	total = 0
 
 	position = { x = 1, y = 1 }
@@ -129,8 +130,8 @@ local function _update()
 		autoscroll = true
 	end
 
-	offsetx = mid(0, width - 32, offsetx)
-	offsety = mid(0, height - 16, offsety)
+	offsetx = mid(0, max(0, width - 32), offsetx)
+	offsety = mid(0, max(0, height - 16), offsety)
 end
 
 local function _draw()

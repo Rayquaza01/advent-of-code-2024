@@ -85,7 +85,7 @@ local function search_grid()
 
 			-- finished checking tile
 			test = {}
-			-- yield()
+			yield()
 		end
 	end
 end
@@ -121,7 +121,9 @@ local function _update()
 	end
 
 	if costatus(cor) ~= "dead" then
-		coresume(cor)
+		if not dbg or btnp(5) then
+			coresume(cor)
+		end
 	end
 
 	if autoscroll then
