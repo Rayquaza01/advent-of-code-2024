@@ -1,5 +1,7 @@
 local pph = require("pph")
 
+local every = require("array.every")
+
 local load_input = require("day04.input")
 
 local g = require("grid.grid")
@@ -9,9 +11,6 @@ local position
 
 local total
 local matches
-
-local test
-local letters
 
 local width
 local height
@@ -28,54 +27,38 @@ local cor
 local function search_grid(x, y)
 	-- pph.info(string.format("Testing tile %d, %d", x, y))
 
-	if grid[y][x] == "X" then
-		-- pph.info("Found X")
-		for d = 1, 8, 1 do
-			-- pph.info("Testing Direction " .. d)
-			test = {{ x = x, y = y }}
+	if grid[y][x] == "A" then
+		-- pph.info("Found an A")
 
-			local current = 1
-			local valid = true
+		adjacents = {
+			table.pack(g.find_adjacent(x, y, g.Directions.UP_LEFT)),
+			table.pack(g.find_adjacent(x, y, g.Directions.DOWN_RIGHT)),
+			table.pack(g.find_adjacent(x, y, g.Directions.UP_RIGHT)),
+			table.pack(g.find_adjacent(x, y, g.Directions.DOWN_LEFT))
+		}
 
-			while valid do
-				if current > 3 then
-					for item in all(test) do
-						add(matches, item)
-					end
+		if every(adjacents, function (item) return g.is_in_bounds(item[1], item[2], width, height) end) then
+			local ul = grid[adjacents[1][2]][adjacents[1][1]]
+			local dr = grid[adjacents[2][2]][adjacents[2][1]]
+			local ur = grid[adjacents[3][2]][adjacents[3][1]]
+			local dl = grid[adjacents[4][2]][adjacents[4][1]]
 
-					-- why does this need to be reset to an inital value here here?
-					-- it should reset in the outer loop???
-					test = {{ x = x, y = y }}
-					-- pph.info("Added matches")
-
-					total += 1
-					valid = false
-					-- yield()
+			if ((ul == "S" and dr == "M") or (ul == "M" and dr == "S")) and
+				((ur == "S" and dl == "M") or (ur == "M" and dl == "S")) then
+				for item in all(adjacents) do
+					add(matches, { x = item[1], y = item[2] })
+					add(matches, { x = x, y = y })
 				end
+				total += 1
 
-				local nx, ny = g.find_adjacent(test[#test].x, test[#test].y, d)
-				-- pph.info(string.format("Adjacent: %d, %d", nx, ny))
-				if g.is_in_bounds(nx, ny, width, height) then
-					if grid[ny][nx] == letters[current] then
-						-- pph.info("Found " .. letters[current])
-						add(test, { x = nx, y = ny })
-						current += 1
-						-- yield()
-					else
-						-- pph.warn("Letter doesn't match")
-						-- break if doesn't match letter
-						test = {}
-						valid = false
-						-- yield()
-					end
-				else
-					-- pph.warn("OOB")
-					-- break if oob
-					test = {}
-					valid = false
-					-- yield()
-				end
+				-- pph.info("Found an X-MAS")
+			else
+				-- pph.warn(ul .. "A" .. dr)
+				-- pph.warn(ur .. "A" .. dl)
+				-- pph.warn("Not an X-MAS")
 			end
+		else
+			-- pph.warn("OOB")
 		end
 	end
 end
@@ -83,7 +66,7 @@ end
 local function _init()
 	window({
 		width = 256, height = 128,
-		title = "AoC Day 4 - Part 1"
+		title = "AoC Day 4 - Part 2"
 	})
 
 	autoscroll = true
@@ -92,14 +75,11 @@ local function _init()
 	grid, width, height = load_input("day04/p1data.txt")
 
 	total = 0
-	test = {}
 	matches = {}
 
 	position = 0
 
 	cor = nil
-
-	letters = { "M", "A", "S" }
 end
 
 local function _update()
@@ -165,12 +145,6 @@ local function _draw()
 	for m in all(matches) do
 		if g.is_in_bounds((m.x - offsetx) * 8, (m.y - offsety) * 8, 256, 128) then
 			print(grid[m.y][m.x], (m.x - offsetx - 1) * 8, (m.y - offsety - 1) * 8, 11)
-		end
-	end
-
-	for t in all(test) do
-		if g.is_in_bounds((t.x - offsetx - 1) * 8, (t.y - offsety - 1) * 8, 256, 128) then
-			print(grid[t.y][t.x], (t.x - offsetx - 1) * 8, (t.y - offsety - 1) * 8, 28)
 		end
 	end
 
