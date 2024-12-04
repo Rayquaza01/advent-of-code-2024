@@ -7,7 +7,21 @@ local function load_input(file)
 		local input = fetch(file)
 		--- @cast input string
 
-		local grid = amap(split(input, "\n", false), function (line) return split(line, "", false) end)
+		local grid = amap(
+			split(input, "\n", false),
+			function (line)
+				return amap(
+					split(line, "", false),
+					function (cell)
+						return { cell, 7 }
+					end
+				)
+			end
+		)
+
+		-- trim final newline
+		deli(grid, #grid)
+
 		local width = #grid[1]
 		local height = #grid
 
