@@ -10,7 +10,6 @@ local grid
 local position
 
 local total
-local matches
 
 local test
 local letters
