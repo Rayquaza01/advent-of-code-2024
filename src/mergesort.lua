@@ -3,7 +3,7 @@
 
 --- Sorts a list using merge sort
 --- @param list table Table to sort
---- @param less_than function Function (a, b) that is truthy when a < b
+--- @param less_than? function Function (a, b) that is truthy when a < b
 local function sort(list, less_than)
 	less_than = less_than or function(a, b)
 		return a < b
