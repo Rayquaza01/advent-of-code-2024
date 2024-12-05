@@ -60,13 +60,14 @@ local function _draw()
 
 	local i = 1
 	for k, v in pairs(rules) do
-		print(string.format("\fe%s\f7 < %s", k, table.concat(v, ",")), 192, (i - 1) * 8)
+		print(string.format("\fe%s\f7 < %s", k, table.concat(v, ",")), 128, (i - 1) * 8)
 		i = i + 1
 	end
 
 	-- print(string.format("\fa%02d\f7", pages[current_page][current_item][1]), (current_item - 1) * 15, (current_page - 1) * 8)
 
-	print(string.format("Sum: \fe%d\f7", sum), 128, 120)
+	rectfill(120, 112, 256, 128, 0)
+	print(string.format("\f7Sum: \fe%d\f7", sum), 128, 120)
 end
 
 local function apply_rule(a, b)
