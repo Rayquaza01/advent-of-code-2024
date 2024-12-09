@@ -30,7 +30,7 @@ function _init()
 		{ "day05/main1", "day05/main2" },
 		{ "day06/main1", "day06/main2" },
 		{ "day07/main1", "day07/main2" },
-		-- { "day08/main1", "day08/main2" },
+		{ "day08/main1", "day08/main2" },
 		-- { "day09/main1", "day09/main2" },
 		-- { "day10/main1", "day10/main2" },
 		-- { "day11/main1", "day11/main2" },
