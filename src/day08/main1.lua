@@ -98,8 +98,8 @@ local function _update()
 		cor = cocreate(find_antinodes)
 	end
 
-	if costatus(cor) ~= "dead" and btnp(5) then
-	-- if costatus(cor) ~= "dead" then
+	-- if costatus(cor) ~= "dead" and btnp(5) then
+	if costatus(cor) ~= "dead" then
 		coresume(cor)
 	end
 
