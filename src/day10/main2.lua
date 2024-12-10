@@ -69,7 +69,7 @@ end
 local function _init()
 	window({
 		width = 256, height = 128,
-		title = "AoC Day 10 - Part 1"
+		title = "AoC Day 10 - Part 2"
 	})
 
 	offsetx = 0
