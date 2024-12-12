@@ -13,6 +13,14 @@ local Directions = {
 	DOWN_LEFT  = 6,
 	LEFT       = 7,
 	UP_LEFT    = 8,
+	"UP",
+	"UP_RIGHT",
+	"RIGHT",
+	"DOWN_RIGHT",
+	"DOWN",
+	"DOWN_LEFT",
+	"LEFT",
+	"UP_LEFT"
 }
 
 --- Check if a position is in bounds
