@@ -199,9 +199,6 @@ local function _update()
 	end
 
 	offsetx, offsety = scroller(offsetx, offsety, width - 32, height - 16, 1, false)
-
-	offsetx = mid(0, max(width, width - 32), offsetx)
-	offsetx = mid(0, max(height, height - 16), offsety)
 end
 
 local function _draw()
