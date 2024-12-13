@@ -1,5 +1,10 @@
 local pph = require("pph")
 
+local cor
+
+local function my_func()
+end
+
 local function _init()
 	window({
 		width = 256, height = 128,
@@ -8,6 +13,14 @@ local function _init()
 end
 
 local function _update()
+	if cor == nil then
+		cor = cocreate(my_func)
+	end
+
+	if costatus(cor) ~= "dead" then
+	-- if costatus(cor) ~= "dead" and btnp(5) then
+		coresume(cor)
+	end
 end
 
 local function _draw()
