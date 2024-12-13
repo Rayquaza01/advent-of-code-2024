@@ -54,6 +54,16 @@ function _init()
 
 	SELECTION_TEXT = ""
 
+	if #argv >= 2 then
+		local day = tonumber(argv[1])
+		local part = tonumber(argv[2])
+		local file = argv[3]
+
+		if day >= 1 and day <= 25 and (part == 1 or part == 2) then
+			load_day(day, part, file)
+		end
+	end
+
 	-- load_day(1, 1)
 end
 
@@ -146,10 +156,10 @@ function _draw()
 	print("Type a \feday\f7\nand \fepart\f7 to\nstart.\n(e.g. \feA1\f7)")
 end
 
-function load_day(d, p)
+function load_day(d, p, file)
 	if AOC_DAYS_CODE[d] ~= nil and AOC_DAYS_CODE[d][p] ~= nil then
 		LOADED = require(AOC_DAYS_CODE[d][p])
-		LOADED._init(argv)
+		LOADED._init(file)
 	else
 		notify(string.format("Script for day %s part %d not found!", d, p))
 	end

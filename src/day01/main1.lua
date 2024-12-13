@@ -11,7 +11,7 @@ local function lt(a, b)
     return a < b
 end
 
-local function _init()
+local function _init(file)
     pph.info("Day 1 Part 1 Start ")
 
 	offset = 0
@@ -24,8 +24,12 @@ local function _init()
     list1 = {}
     list2 = {}
 
-    -- local input = fetch("day01/p1test.txt")
-    local input = fetch("day01/p1data.txt")
+	if not file then
+		-- file = "day01/p1test.txt"
+		file = "day01/p1data.txt"
+	end
+
+    local input = fetch(file)
     pph.info("Loaded input")
     if type(input) ~= "string" then
         error("Invalid input")

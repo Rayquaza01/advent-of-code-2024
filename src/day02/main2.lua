@@ -28,7 +28,7 @@ local function negative(n)
 	return n == "nil" or n < 0
 end
 
-local function _init()
+local function _init(file)
 	pph.pretty_printh("[fg=3]== Day 2 Part 2 Start ==[/fg]")
 
 	window({
@@ -36,8 +36,12 @@ local function _init()
 		title = "AoC Day 2 - Part 2"
 	})
 
-	-- records = get_input("day02/p1test.txt")
-	records = get_input("day02/p1data.txt")
+	if not file then
+		-- file = "day02/p1test.txt"
+		file = "day02/p1data.txt"
+	end
+
+	records = get_input(file)
 
 	recordidx = 1
 	offset = 1
