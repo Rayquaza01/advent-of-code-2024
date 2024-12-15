@@ -22,6 +22,10 @@ local autoscroll
 
 local cor
 
+--- Check if a given position in the grid is movable
+--- @param x integer
+--- @param y integer
+--- @param d integer
 local function is_movable(x, y, d)
 	local ax, ay = g.find_adjacent(x, y, d)
 	if g.is_in_bounds(ax, ay, width, height) then
@@ -39,8 +43,7 @@ local function is_movable(x, y, d)
 					bx, by = g.find_adjacent(ax, ay, g.Directions.LEFT)
 				end
 
-				-- if adjacent is left box, and direction is up/down
-				-- only movable if right box is also movable
+				-- only movable if both box components are movable
 
 				return is_movable(ax, ay, d) and is_movable(bx, by, d)
 			else
@@ -56,7 +59,7 @@ local function is_movable(x, y, d)
 	end
 end
 
---- Moves items in on the grid. If test is set, only check if items are moveable
+--- Moves items in on the grid.
 --- @param x integer
 --- @param y integer
 --- @param d integer
