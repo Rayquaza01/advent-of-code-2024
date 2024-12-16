@@ -88,6 +88,7 @@ local function navigate_grid()
 					end
 				end
 
+				-- TODO - figure out why this doesn't work on actual input
 				if new_score == ascore and bsearch(e_scores, g.encode_pos(ax, ay, width, height)) > 0 then
 					pph.info("On Best Path")
 					pph.info(string.format("New Score: %d, Adjacent Score: %d", new_score, ascore))
@@ -144,7 +145,7 @@ local function _init()
 	-- grid, width, height, s, e = get_input("day16/p1test2.txt")
 	-- e_score = 11048
 	grid, width, height, s, e = get_input("day16/p1data.txt")
-	e_score = 72428
+	-- e_score = 72428
 end
 
 local function _update()
@@ -152,8 +153,8 @@ local function _update()
 		cor = cocreate(navigate_grid)
 	end
 
-	-- if costatus(cor) ~= "dead" then
-	if costatus(cor) ~= "dead" and btnp(5) then
+	if costatus(cor) ~= "dead" then
+	-- if costatus(cor) ~= "dead" and btnp(5) then
 		coresume(cor)
 	end
 
