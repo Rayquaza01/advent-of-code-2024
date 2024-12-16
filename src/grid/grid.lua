@@ -49,9 +49,9 @@ end
 
 local function decode_pos(pos, width, height)
 	pos += width * height
-	local x = pos % width + 1
+	local y = pos % width + 1
 	pos = flr(pos / width)
-	local y = pos % height + 1
+	local x = pos % height + 1
 
 	return x, y
 end
