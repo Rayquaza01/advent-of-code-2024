@@ -57,7 +57,6 @@ local function navigate_grid()
 
 		add(v_stack, g.encode_pos(x, y, width, height))
 
-
 		local dirs = {
 			{front.d, 1},
 			{(front.d + 2) % 8, 1001},
@@ -72,7 +71,10 @@ local function navigate_grid()
 				local acell, ascore = grid[ay][ax][1], grid[ay][ax][5][d]
 
 				local new_score = score + dscore
-				if (acell == "." or acell == "E") and new_score < ascore and new_score <= e_score then
+
+				-- pph.info(string.format("%d, %d : %d : %d + %d = %d", ax, ay, ascore, score, dscore, new_score))
+
+				if (acell == "." or acell == "E") and new_score <= ascore and new_score <= e_score then
 					-- pph.info(string.format("Found adjacent %d, %d (%s) in direction %s", ax, ay, acell, g.Directions[d]))
 					-- pph.info(string.format("Adjacent Score: %d, New Score: %d", ascore, new_score))
 
@@ -89,14 +91,15 @@ local function navigate_grid()
 				end
 
 				-- TODO - figure out why this doesn't work on actual input
-				if new_score == ascore and bsearch(e_scores, g.encode_pos(ax, ay, width, height)) > 0 then
-					pph.info("On Best Path")
-					pph.info(string.format("New Score: %d, Adjacent Score: %d", new_score, ascore))
-					yield()
-					for i in all(v_stack) do
-						set_add(e_scores, i)
-					end
-				end
+				-- if new_score == ascore and bsearch(e_scores, g.encode_pos(ax, ay, width, height)) > 0 then
+				-- 	pph.info("On Best Path")
+				-- 	pph.info(string.format("New Score: %d, Adjacent Score: %d", new_score, ascore))
+				-- 	yield()
+				-- 	for i in all(v_stack) do
+				-- 		set_add(e_scores, i)
+				-- 	end
+				-- end
+
 
 				if acell == "E" then
 					if e_score > new_score then
