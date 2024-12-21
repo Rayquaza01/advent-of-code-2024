@@ -49,10 +49,15 @@ function _init()
 		{},
 		{ "day20/main1", "day20/main2" },
 		-- { "day21/main1", "day21/main2" },
+		{},
 		-- { "day22/main1", "day22/main2" },
+		{},
 		-- { "day23/main1", "day23/main2" },
+		{},
 		-- { "day24/main1", "day24/main2" },
+		{},
 		-- { "day25/main1", "day25/main2" },
+		{},
 	}
 
 	STARS = 0
