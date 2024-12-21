@@ -44,14 +44,14 @@ local function find_adjacent(x, y, d)
 end
 
 local function encode_pos(x, y, width, height)
-	return y - 1 + width * (x - 1 + height) - width * height
+	return x - 1 + width * (y - 1 + height) - width * height
 end
 
 local function decode_pos(pos, width, height)
 	pos += width * height
-	local y = pos % width + 1
+	local x = pos % width + 1
 	pos = flr(pos / width)
-	local x = pos % height + 1
+	local y = pos % height + 1
 
 	return x, y
 end
