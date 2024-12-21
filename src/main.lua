@@ -12,6 +12,8 @@ local AOC_DAYS_CODE
 local LOADED
 local SELECTION_TEXT
 
+local STARS
+
 function _init()
 	--- @type userdata[]
 	SNOWFLAKES = {}
@@ -40,15 +42,25 @@ function _init()
 		{ "day15/main1", "day15/main2" },
 		{ "day16/main1", "day16/main2" },
 		-- { "day17/main1", "day17/main2" },
+		{ "day17/main1" },
 		-- { "day18/main1", "day18/main2" },
+		{},
 		-- { "day19/main1", "day19/main2" },
-		-- { "day20/main1", "day20/main2" },
+		{},
+		{ "day20/main1", "day20/main2" },
 		-- { "day21/main1", "day21/main2" },
 		-- { "day22/main1", "day22/main2" },
 		-- { "day23/main1", "day23/main2" },
 		-- { "day24/main1", "day24/main2" },
 		-- { "day25/main1", "day25/main2" },
 	}
+
+	STARS = 0
+	for i = 1, #AOC_DAYS_CODE, 1 do
+		if AOC_DAYS_CODE[i] ~= nil then
+			STARS += #AOC_DAYS_CODE[i]
+		end
+	end
 
 	LOADED = nil
 
@@ -132,10 +144,17 @@ function _draw()
 
 	for i = 1, 25, 1 do
 		if AOC_DAYS_CODE[i] ~= nil then
+			local col = "\f8"
+			if #AOC_DAYS_CODE[i] == 2 then
+				col = "\fa"
+			elseif #AOC_DAYS_CODE[i] == 1 then
+				col = "\f9"
+			end
+
 			print(
 				string.format(
 					"Day %s%02d\f7 (\fr%s\f7)",
-					#AOC_DAYS_CODE[i] == 2 and "\fa" or "\f9",
+					col,
 					i, chr(i + 64)
 				),
 				((i > 16) and 64 or 0),
@@ -154,6 +173,7 @@ function _draw()
 	end
 
 	print("Type a \feday\f7\nand \fepart\f7 to\nstart.\n(e.g. \feA1\f7)")
+	print(string.format("\fa\146 %02d/50\f7", STARS))
 end
 
 function load_day(d, p, file)
